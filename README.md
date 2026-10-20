@@ -4,6 +4,7 @@ A tiny Neovim plugin: runs a command on `InsertLeave` to turn the IME off, and
 optionally runs another on `InsertEnter` to turn it back on.
 
 Works with anything you can drive from the shell: fcitx5, ibus, im-select, etc.
+Tested with `fcitx5-remote` on Linux.
 
 ## Install
 
