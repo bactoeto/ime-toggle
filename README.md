@@ -22,17 +22,17 @@ Tested with `fcitx5-remote` on Linux.
 
 ```lua
 require("ime-toggle").setup({
-    deactivate = "fcitx5-remote -c", -- run on InsertLeave
-    activate = "fcitx5-remote -o",   -- run on InsertEnter (only if enabled)
-    enabled = false,                 -- run activate on InsertEnter?
+    deactivate = "fcitx5-remote -c",      -- run on InsertLeave
+    activate = "fcitx5-remote -s rime",   -- run on InsertEnter (only if enabled)
+    enabled = false,                      -- run activate on InsertEnter?
 })
 ```
 
-Defaults are for fcitx5. Other examples:
+Defaults are for fcitx5 with the rime input method. Other examples:
 
 ```lua
--- fcitx5, a specific input method
-activate = "fcitx5-remote -s rime"
+-- fcitx5: just turn the current IME on/off
+activate = "fcitx5-remote -o"
 
 -- ibus
 deactivate = "ibus engine xkb:us::eng"

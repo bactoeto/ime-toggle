@@ -2,7 +2,7 @@ local M = {}
 
 local defaults = {
     -- command run on InsertEnter when enabled
-    activate = "fcitx5-remote -o",
+    activate = "fcitx5-remote -s rime",
     -- command run on InsertLeave
     deactivate = "fcitx5-remote -c",
     -- whether InsertEnter runs the activate command
