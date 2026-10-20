@@ -1,7 +1,9 @@
 # ime-toggle
 
 A tiny Neovim plugin: turns the IME off on `InsertLeave`, and optionally back on
-on `InsertEnter`. Uses `fcitx5-remote` (Linux + fcitx5).
+on `InsertEnter`. 
+
+Tested with `fcitx5-remote` int Linux.
 
 ## Install
 
