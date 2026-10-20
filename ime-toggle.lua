@@ -40,17 +40,19 @@ local function setup(opts)
     end, { desc = "Toggle IME activation on InsertEnter" })
 end
 
--- Current input method name, e.g. "rime" (or "keyboard-us" when off).
+-- Current input method name, e.g. "rime", or "none" when the IME is off.
 local function current()
     if config.query == "" then
-        return ""
+        return "none"
     end
     local now = vim.loop.now()
     if now - cache.at < ttl then
         return cache.value
     end
-    local out = vim.fn.system(config.query)
-    cache.value = vim.v.shell_error == 0 and vim.trim(out) or ""
+    cache.value = vim.trim(vim.fn.system(config.query))
+    if vim.v.shell_error ~= 0 or cache.value == "" or cache.value:match("^keyboard") then
+        cache.value = "none"
+    end
     cache.at = now
     return cache.value
 end
