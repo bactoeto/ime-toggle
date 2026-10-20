@@ -6,7 +6,7 @@ on `InsertEnter`.
 ## Install
 
 ```lua
-crequire("ime-toggle").setup()
+require("ime-toggle").setup()
 ```
 
 ## Config
