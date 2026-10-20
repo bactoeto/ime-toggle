@@ -1,17 +1,26 @@
 local M = {}
 
 local defaults = {
-    cmd = "fcitx5-remote",
-    ime_name = "rime",  -- override via setup(), e.g. "rime", "mozc", "hangul"
-    enabled = false,       -- whether InsertEnter activates the IME
+    -- command run on InsertEnter when enabled
+    activate = "fcitx5-remote -o",
+    -- command run on InsertLeave
+    deactivate = "fcitx5-remote -c",
+    -- whether InsertEnter runs the activate command
+    enabled = false,
 }
 
 local config = {}
 local enabled = false
 
+local function run(cmd)
+    if cmd and cmd ~= "" then
+        vim.fn.system(cmd)
+    end
+end
+
 local function set_enabled(value)
     enabled = not not value
-    vim.notify("ime-toggle: " .. (enabled and config.ime_name or "off"))
+    vim.notify("ime-toggle: " .. (enabled and "on" or "off"))
 end
 
 function M.setup(opts)
@@ -23,7 +32,7 @@ function M.setup(opts)
     vim.api.nvim_create_autocmd("InsertLeave", {
         group = group,
         callback = function()
-            vim.fn.system(config.cmd .. " -c")
+            run(config.deactivate)
         end,
     })
 
@@ -31,7 +40,7 @@ function M.setup(opts)
         group = group,
         callback = function()
             if enabled then
-                vim.fn.system(config.cmd .. " -s " .. config.ime_name)
+                run(config.activate)
             end
         end,
     })
